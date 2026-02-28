@@ -1,0 +1,87 @@
+CREATE DATABASE Exercicio;
+USE Exercicio;
+
+CREATE TABLE clientes (
+    id_cliente INT PRIMARY KEY,
+    nome VARCHAR(100),
+    email VARCHAR(100),
+    cidade VARCHAR(50)
+);
+
+CREATE TABLE produtos (
+    id_produto INT PRIMARY KEY,
+    nome_produto VARCHAR(100),
+    preco DECIMAL(8,2),
+    estoque INT
+);
+
+CREATE TABLE vendas (
+    id_venda INT PRIMARY KEY,
+    id_cliente INT,
+    id_produto INT,
+    quantidade INT
+);
+alter table vendas add column data_venda date;
+alter table vendas add column forma_pagamento varchar(100);
+/*Exercícios – INSERT
+
+Insira 3 clientes diferentes
+
+Insira 4 produtos
+
+Insira 5 vendas relacionando clientes e produtos*/
+
+describe clientes;
+insert into clientes values
+(14, 'Geraldina', 'geraldina@hotmali.com', 'Barbacena'),
+(27, 'Antônio', 'tony@hotmail.com','Juiz de Fora'),
+(03, 'Humberto', 'beto@hotmail.com', 'Barbacena');
+
+desc produtos;
+insert into produtos values
+(1, 'feijao', 4.99, 12),
+(2, 'arroz', 12.5, 10),
+(3, 'macarrão', 6.5, 15),
+(4, 'fubá', 3.99, 9);
+
+desc vendas;
+insert into vendas values
+(11,2,27,3,'2026-01-05','PIX'),
+(12,4,14,2,'2026-02-14','Cartão'),
+(13,3,14,3,'2026-02-14','Cartão'),
+(14,1,03,4,'2026-01-07','Dinheiro'),
+(15,2,03,6,'2026-01-08','Cartão');
+
+/* Exercícios – ALTER TABLE
+
+Adicione a coluna telefone na tabela clientes para VARCHAR(20)*/
+
+alter table clientes add column telefone varchar(20);
+
+select*from clientes;
+update clientes set telefone = 32987062231 where id_cliente = 3;
+update clientes set telefone = 32992741354 where id_cliente = 14;
+update clientes set telefone = 32964789321 where id_cliente = 27;
+
+/*Atualize a cidade de um cliente específico
+
+Atualize o preço de um produto
+
+Atualize o estoque de todos os produtos reduzindo 2 unidades*/
+
+update clientes set cidade = 'Muriaé' where id_cliente = 3;
+
+select*from produtos;
+update produtos set preco=5.99 where id_produto = 1;
+
+update produtos set estoque=10 where id_produto = 1;
+update produtos set estoque=8 where id_produto = 2;
+update produtos set estoque=13 where id_produto = 3;
+update produtos set estoque=7 where id_produto = 4;
+
+/*
+Exercícios – DELETE
+Exclua uma venda específica
+*/
+
+delete from vendas where id_venda =15;
