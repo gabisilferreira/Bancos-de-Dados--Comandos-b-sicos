@@ -59,9 +59,9 @@ Adicione a coluna telefone na tabela clientes para VARCHAR(20)*/
 alter table clientes add column telefone varchar(20);
 
 select*from clientes;
-update clientes set telefone = 32987062231 where id_cliente = 3;
-update clientes set telefone = 32992741354 where id_cliente = 14;
-update clientes set telefone = 32964789321 where id_cliente = 27;
+update clientes set telefone = '32987062231' where id_cliente = 3;
+update clientes set telefone = '32992741354' where id_cliente = 14;
+update clientes set telefone = '32964789321' where id_cliente = 27;
 
 /*Atualize a cidade de um cliente específico
 
@@ -74,10 +74,8 @@ update clientes set cidade = 'Muriaé' where id_cliente = 3;
 select*from produtos;
 update produtos set preco=5.99 where id_produto = 1;
 
-update produtos set estoque=10 where id_produto = 1;
-update produtos set estoque=8 where id_produto = 2;
-update produtos set estoque=13 where id_produto = 3;
-update produtos set estoque=7 where id_produto = 4;
+UPDATE produtos
+SET estoque = estoque - 2;
 
 /*
 Exercícios – DELETE
