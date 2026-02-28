@@ -1,6 +1,7 @@
 CREATE DATABASE Exercicio;
 USE Exercicio;
 
+-- TABELA CLIENTES
 CREATE TABLE clientes (
     id_cliente INT PRIMARY KEY,
     nome VARCHAR(100),
@@ -8,6 +9,7 @@ CREATE TABLE clientes (
     cidade VARCHAR(50)
 );
 
+-- TABELA PRODUTOS
 CREATE TABLE produtos (
     id_produto INT PRIMARY KEY,
     nome_produto VARCHAR(100),
@@ -15,71 +17,79 @@ CREATE TABLE produtos (
     estoque INT
 );
 
+-- TABELA VENDAS
 CREATE TABLE vendas (
     id_venda INT PRIMARY KEY,
-    id_cliente INT,
     id_produto INT,
+    id_cliente INT,
     quantidade INT
 );
-alter table vendas add column data_venda date;
-alter table vendas add column forma_pagamento varchar(100);
-/*Exercícios – INSERT
 
-Insira 3 clientes diferentes
+-- ALTERAÇÕES NA TABELA VENDAS
+ALTER TABLE vendas ADD COLUMN data_venda DATE;
+ALTER TABLE vendas ADD COLUMN forma_pagamento VARCHAR(100);
 
-Insira 4 produtos
+-
+-- INSERTS
 
-Insira 5 vendas relacionando clientes e produtos*/
 
-describe clientes;
-insert into clientes values
+-- CLIENTES
+INSERT INTO clientes (id_cliente, nome, email, cidade) VALUES
 (14, 'Geraldina', 'geraldina@hotmali.com', 'Barbacena'),
 (27, 'Antônio', 'tony@hotmail.com','Juiz de Fora'),
-(03, 'Humberto', 'beto@hotmail.com', 'Barbacena');
+(3, 'Humberto', 'beto@hotmail.com', 'Barbacena');
 
-desc produtos;
-insert into produtos values
-(1, 'feijao', 4.99, 12),
-(2, 'arroz', 12.5, 10),
-(3, 'macarrão', 6.5, 15),
-(4, 'fubá', 3.99, 9);
+-- PRODUTOS
+INSERT INTO produtos (id_produto, nome_produto, preco, estoque) VALUES
+(1, 'Feijão', 4.99, 12),
+(2, 'Arroz', 12.50, 10),
+(3, 'Macarrão', 6.50, 15),
+(4, 'Fubá', 3.99, 9);
 
-desc vendas;
-insert into vendas values
-(11,2,27,3,'2026-01-05','PIX'),
-(12,4,14,2,'2026-02-14','Cartão'),
-(13,3,14,3,'2026-02-14','Cartão'),
-(14,1,03,4,'2026-01-07','Dinheiro'),
-(15,2,03,6,'2026-01-08','Cartão');
+-- VENDAS
+-- (boa prática: sempre informar as colunas)
+INSERT INTO vendas (
+    id_venda, id_produto, id_cliente, quantidade, data_venda, forma_pagamento
+) VALUES
+(11, 2, 27, 3, '2026-01-05', 'PIX'),
+(12, 4, 14, 2, '2026-02-14', 'Cartão'),
+(13, 3, 14, 3, '2026-02-14', 'Cartão'),
+(14, 1, 3, 4, '2026-01-07', 'Dinheiro'),
+(15, 2, 3, 6, '2026-01-08', 'Cartão');
 
-/* Exercícios – ALTER TABLE
 
-Adicione a coluna telefone na tabela clientes para VARCHAR(20)*/
+-- ALTER TABLE
 
-alter table clientes add column telefone varchar(20);
 
-select*from clientes;
-update clientes set telefone = '32987062231' where id_cliente = 3;
-update clientes set telefone = '32992741354' where id_cliente = 14;
-update clientes set telefone = '32964789321' where id_cliente = 27;
+ALTER TABLE clientes ADD COLUMN telefone VARCHAR(20);
 
-/*Atualize a cidade de um cliente específico
+-- ATUALIZAÇÃO DOS TELEFONES
+UPDATE clientes SET telefone = '32987062231' WHERE id_cliente = 3;
+UPDATE clientes SET telefone = '32992741354' WHERE id_cliente = 14;
+UPDATE clientes SET telefone = '32964789321' WHERE id_cliente = 27;
 
-Atualize o preço de um produto
 
-Atualize o estoque de todos os produtos reduzindo 2 unidades*/
+-- UPDATES
 
-update clientes set cidade = 'Muriaé' where id_cliente = 3;
 
-select*from produtos;
-update produtos set preco=5.99 where id_produto = 1;
+-- Atualiza cidade de um cliente específico
+UPDATE clientes
+SET cidade = 'Muriaé'
+WHERE id_cliente = 3;
 
+-- Atualiza preço de um produto
+UPDATE produtos
+SET preco = 5.99
+WHERE id_produto = 1;
+
+-- Reduz o estoque de TODOS os produtos em 2 unidades
 UPDATE produtos
 SET estoque = estoque - 2;
 
-/*
-Exercícios – DELETE
-Exclua uma venda específica
-*/
 
-delete from vendas where id_venda =15;
+-- DELETE
+
+
+-- Exclui uma venda específica
+DELETE FROM vendas
+WHERE id_venda = 15;
